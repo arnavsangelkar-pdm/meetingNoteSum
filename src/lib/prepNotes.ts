@@ -6,7 +6,7 @@ export function buildPrepNotes(opts: {
   lastCalls: CallNote[];
   repeatedThemeKeys: string[];
 }): string {
-  const { clientName, lastCalls, repeatedThemeKeys } = opts;
+  const { lastCalls, repeatedThemeKeys } = opts;
 
   const personalHook = lastCalls.find(c =>
     c.topics.includes('family-events')

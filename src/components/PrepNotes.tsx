@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 
 export default function PrepNotes({ text }: { text: string }) {
-  const [copied, setCopied] = React.useState(false);
+  const [copied, setCopied] = useState(false);
   async function onCopy() {
     await navigator.clipboard.writeText(text);
     setCopied(true);

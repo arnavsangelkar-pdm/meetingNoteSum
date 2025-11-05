@@ -1,4 +1,3 @@
-import React from 'react';
 import { CallNote } from '../lib/types';
 import { formatDate } from '../lib/string';
 

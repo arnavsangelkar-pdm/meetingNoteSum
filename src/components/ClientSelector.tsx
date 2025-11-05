@@ -1,4 +1,3 @@
-import React from 'react';
 import { Client } from '../lib/types';
 
 export default function ClientSelector({

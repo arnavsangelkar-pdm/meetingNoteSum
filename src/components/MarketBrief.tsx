@@ -1,4 +1,3 @@
-import React from 'react';
 import { Headline } from '../lib/types';
 import { formatDate } from '../lib/string';
 

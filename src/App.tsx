@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo } from 'react';
 import { clients } from './data/clients';
 import { calls } from './data/calls';
 import { headlines } from './data/headlines';
@@ -14,14 +14,14 @@ import PrepNotes from './components/PrepNotes';
 import EmptyState from './components/EmptyState';
 
 export default function App() {
-  const [clientId, setClientId] = React.useState<string>(clients[0]?.id ?? '');
+  const [clientId, setClientId] = useState<string>(clients[0]?.id ?? '');
 
-  const client = React.useMemo<Client | undefined>(
+  const client = useMemo<Client | undefined>(
     () => clients.find(c => c.id === clientId),
     [clientId]
   );
 
-  const clientCalls = React.useMemo<CallNote[]>(
+  const clientCalls = useMemo<CallNote[]>(
     () =>
       calls
         .filter(c => c.clientId === clientId)
@@ -30,14 +30,14 @@ export default function App() {
     [clientId]
   );
 
-  const themes = React.useMemo(
+  const themes = useMemo(
     () => computeThemes(clientCalls),
     [clientCalls]
   );
 
   const repeatedKeys = themes.filter(t => t.count >= 2).map(t => t.key);
 
-  const relatedHeadlines: Headline[] = React.useMemo(() => {
+  const relatedHeadlines: Headline[] = useMemo(() => {
     const tagged = headlines
       .filter(h => h.tags.some(t => repeatedKeys.includes(t)))
       .sort((a, b) => b.date.localeCompare(a.date))
@@ -52,7 +52,7 @@ export default function App() {
     return [...tagged, ...padding];
   }, [repeatedKeys]);
 
-  const prep = React.useMemo(
+  const prep = useMemo(
     () =>
       buildPrepNotes({
         clientName: client?.name ?? 'Client',

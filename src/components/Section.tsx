@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
 export default function Section({
   title,
@@ -7,7 +7,7 @@ export default function Section({
 }: {
   title: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section className="rounded-2xl border bg-white p-4 md:p-6 shadow-sm">
