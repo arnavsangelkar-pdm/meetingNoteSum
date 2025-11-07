@@ -109,18 +109,11 @@ function Field({ label, children, help }: { label: string; children: React.React
   );
 }
 
-function Toolbar({ children }: { children: React.ReactNode }) {
-  return <div className="flex items-center gap-2">{children}</div>;
-}
-
 function GhostButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return <button {...props} className={`btn-ghost ${props.className ?? ''}`} />;
 }
 function OutlineButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return <button {...props} className={`btn-outline ${props.className ?? ''}`} />;
-}
-function PrimaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button {...props} className={`btn-primary ${props.className ?? ''}`} />;
 }
 
 function ItemCard({
