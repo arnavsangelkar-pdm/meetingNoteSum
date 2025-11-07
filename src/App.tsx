@@ -12,9 +12,11 @@ import ThemeChips from './components/ThemeChips';
 import MarketBrief from './components/MarketBrief';
 import PrepNotes from './components/PrepNotes';
 import EmptyState from './components/EmptyState';
+import ClientProfileView from './components/profile/ClientProfileView';
 
 export default function App() {
   const [clientId, setClientId] = useState<string>(clients[0]?.id ?? '');
+  const [activeTab, setActiveTab] = useState<'prep' | 'profile'>('prep');
 
   const client = useMemo<Client | undefined>(
     () => clients.find(c => c.id === clientId),
@@ -81,26 +83,45 @@ export default function App() {
         />
       </div>
 
+      <div className="mb-4 flex gap-2">
+        <button
+          className={`btn-outline ${activeTab === 'prep' ? 'bg-gray-900 text-white border-gray-900 hover:bg-black' : ''}`}
+          onClick={() => setActiveTab('prep')}
+        >
+          Prep
+        </button>
+        <button
+          className={`btn-outline ${activeTab === 'profile' ? 'bg-gray-900 text-white border-gray-900 hover:bg-black' : ''}`}
+          onClick={() => setActiveTab('profile')}
+        >
+          Profile
+        </button>
+      </div>
+
       {!client || clientCalls.length === 0 ? (
-        <EmptyState />
+        activeTab === 'prep' ? <EmptyState /> : <ClientProfileView client={client} />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Section title="Last 3 Calls" subtitle={`${client.name} — latest touchpoints`}>
-            <CallSummaryList calls={clientCalls} />
-          </Section>
+        activeTab === 'prep' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Section title="Last 3 Calls" subtitle={`${client.name} — latest touchpoints`}>
+              <CallSummaryList calls={clientCalls} />
+            </Section>
 
-          <Section title="Key Patterns" subtitle="Repeated themes from recent calls">
-            <ThemeChips themes={themes.filter(t => t.count >= 2)} />
-          </Section>
+            <Section title="Key Patterns" subtitle="Repeated themes from recent calls">
+              <ThemeChips themes={themes.filter(t => t.count >= 2)} />
+            </Section>
 
-          <Section title="Market Brief" subtitle="3 headlines aligned to client concerns">
-            <MarketBrief headlines={relatedHeadlines} />
-          </Section>
+            <Section title="Market Brief" subtitle="3 headlines aligned to client concerns">
+              <MarketBrief headlines={relatedHeadlines} />
+            </Section>
 
-          <Section title="Prep Notes" subtitle={`Generated from call patterns`}>
-            <PrepNotes text={prep} />
-          </Section>
-        </div>
+            <Section title="Prep Notes" subtitle="Generated from call patterns">
+              <PrepNotes text={prep} />
+            </Section>
+          </div>
+        ) : (
+          <ClientProfileView client={client} />
+        )
       )}
     </div>
   );

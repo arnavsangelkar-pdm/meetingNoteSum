@@ -4,3 +4,42 @@
 
 :root { color-scheme: light; }
 
+@layer components {
+  .card {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-sm;
+  }
+  .section {
+    @apply card p-4 md:p-6;
+  }
+  .subcard {
+    @apply rounded-xl border border-gray-200 bg-white/60;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg border px-3 py-1.5 text-sm transition-colors;
+  }
+  .btn-ghost {
+    @apply btn border-transparent hover:bg-gray-100;
+  }
+  .btn-outline {
+    @apply btn bg-white hover:bg-gray-50;
+  }
+  .btn-primary {
+    @apply btn bg-gray-900 text-white border-gray-900 hover:bg-black;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border px-2 py-1 text-xs;
+  }
+  .label-sm {
+    @apply block text-xs font-medium text-gray-600;
+  }
+  .input {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:border-gray-400;
+  }
+  .grid-12 {
+    @apply grid grid-cols-12 gap-3;
+  }
+  .item-header {
+    @apply flex items-center justify-between gap-2 border-b border-gray-200 pb-2;
+  }
+}
+
