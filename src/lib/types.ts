@@ -12,6 +12,7 @@ export type CallNote = {
   summary: string;     // one-paragraph human note
   topics: string[];    // ['tariffs','foreign-equities','grandson-wedding']
   sentiment: 'calm' | 'concerned' | 'optimistic' | 'panicked';
+  transcript?: string;  // full call transcript
 };
 
 export type Headline = {
